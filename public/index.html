@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="""es"></html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Descargar PlacaOk v0.0.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    :root {
+      --theme-bg: #f5faff;
+      --theme-container-bg: #e3f2fd;
+      --theme-border: #90caf9;
+      --theme-title: #0d47a1;
+      --theme-btn-bg: #43a047;
+      --theme-btn-bg-hover: #388e3c;
+      --theme-btn-text: #fff;
+      --theme-version: #0d47a1;
+      --qr-bg: #e3f2fd;
+      --qr-fg: #0d47a1;
+      --safe-padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+    }
+    html, body { height: 100%; margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--theme-bg);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--safe-padding);
+    }
+    .container {
+      background: var(--theme-container-bg);
+      border: 2px solid var(--theme-border);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+      margin: 2.5rem 1rem;
+      max-width: 1200px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      transition: box-shadow 0.2s;
+    }
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1 1 0;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 1rem 1rem;
+    }
+    .col:not(:last-child) { border-right: 1.5px solid var(--theme-border); }
+    .qr-section {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--qr-bg);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem 1rem 1.5rem;
+      border: 1.5px solid var(--theme-border);
+      box-shadow: 0 1px 4px rgba(13, 71, 161, 0.06);
+      width: fit-content;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .qr-label {
+      margin-bottom: 0.5rem;
+      color: var(--theme-title);
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      color: var(--theme-title);
+      font-size: 2.2rem;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+    .version {
+      color: var(--theme-version);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .description {
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-size: 1.12rem;
+      line-height: 1.6;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .features {
+      text-align: left;
+      margin: 1.5rem 0 1rem 0;
+      padding: 0 0.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .features-title {
+      color: var(--theme-title);
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .features-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #234;
+      font-size: 1rem;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      background: var(--theme-btn-bg);
+      color: var(--theme-btn-text);
+      border: none;
+      border-radius: 5px;
+      font-size: 1.15rem;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s;
+      margin-top: 1.2rem;
+      width: 100%;
+      max-width: 280px;
+      box-sizing: border-box;
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(67, 160, 71, 0.08);
+      text-align: center;
+    }
+    .download-btn:hover,
+    .download-btn:focus {
+      background: var(--theme-btn-bg-hover);
+      box-shadow: 0 2px 8px rgba(67, 160, 71, 0.12);
+      outline: none;
+    }
+    .instructions {
+      margin-top: 1.3rem;
+      background: #e8f5e9;
+      border-left: 4px solid #43a047;
+      padding: 1rem 1.1rem;
+      border-radius: 6px;
+      color: #205c23;
+      font-size: 1rem;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1rem;
+        max-width: 98vw;
+        margin: 1.5rem 0.5rem;
+      }
+      .col {
+        border-right: none !important;
+        border-bottom: 1.5px solid var(--theme-border);
+        min-width: 0;
+        padding: 1.2rem 0.5rem;
+      }
+      .col:last-child {
+        border-bottom: none;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .description,
+      .features,
+      .instructions {
+        font-size: 1.03rem;
+      }
+      .download-btn {
+        font-size: 1.05rem;
+        padding: 0.8rem 1.2rem;
+      }
+      .qr-section {
+        width: 100%;
+        max-width: 340px;
+      }
+    }
+    @media (max-width: 600px) {
+      body {
+        justify-content: flex-start;
+        padding: calc(env(safe-area-inset-top, 0) + 0.5rem) calc(env(safe-area-inset-right, 0) + 0.5rem) calc(env(safe-area-inset-bottom, 0) + 0.5rem) calc(env(safe-area-inset-left, 0) + 0.5rem);
+      }
+      .container {
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.2rem 0.7rem;
+        max-width: 100vw;
+        min-width: 0;
+        margin: 1rem 0.2rem;
+        border-radius: 10px;
+      }
+      .col {
+        border-right: none !important;
+        border-bottom: 1.5px solid var(--theme-border);
+        padding-bottom: 1.2rem;
+        margin-bottom: 1.2rem;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+      }
+      .col:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .qr-section {
+        padding: 1rem 0.5rem 0.7rem 0.5rem;
+        width: 100%;
+        min-width: 0;
+        border-radius: 7px;
+        max-width: 100%;
+      }
+      .description,
+      .features,
+      .instructions {
+        font-size: 0.98rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+      .download-btn {
+        font-size: 0.98rem;
+        padding: 0.7rem 1rem;
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 400px) {
+      .container {
+        padding: 0.7rem 0.2rem;
+        border-radius: 7px;
+      }
+      .qr-section {
+        padding: 0.7rem 0.2rem 0.5rem 0.2rem;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+      .col {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    /* DARK MODE */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme-bg: #121a23;
+        --theme-container-bg: #263238;
+        --theme-border: #37474f;
+        --theme-title: #e0f7fa;
+        --theme-btn-bg: #66bb6a;
+        --theme-btn-bg-hover: #43a047;
+        --theme-btn-text: #fff;
+        --theme-version: #bbdefb;
+        --qr-bg: #263238;
+        --qr-fg: #bbdefb;
+      }
+      body {
+        color: var(--theme-title);
+        background: var(--theme-bg);
+      }
+      .description,
+      .features-title {
+        color: var(--theme-title);
+      }
+      .features-list {
+        color: #e3f2fd;
+      }
+      .instructions {
+        background: #1b2a32;
+        border-left: 4px solid var(--theme-btn-bg);
+        color: #a5d6a7;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Columna 1: QR e instrucciones -->
+    <div class="col">
+      <h1>Descargar PlacaOk</h1>
+      <div class="version">Versión actual: v0.0.1</div>
+      <div class="description">
+        PlacaOk es tu aplicación para gestionar y verificar matrículas vehiculares fácilmente.
+        Diseñada para ser rápida y confiable, PlacaOk te ayuda a consultar, registrar y organizar información de placas directamente desde tu dispositivo Android.
+      </div>
+      <a class="download-btn" href="https://expo.dev/artifacts/eas/6NhaSeNe67vkuHDCLBFrGD.apk" download>
+        Descargar APK
+      </a>
+    </div>
+    <!-- Columna 2: QR y ayuda -->
+    <div class="col">
+      <div class="qr-section">
+        <div class="qr-label">Escanea para abrir en Expo:</div>
+        <canvas id="qr"></canvas>
+      </div>
+      <div class="instructions">
+        <strong>¿Cómo instalar?</strong>
+        <ol style="margin:0.5em 0 0 1.2em; padding:0;">
+          <li>Descarga el archivo APK en tu dispositivo Android.</li>
+          <li>Si es necesario, permite la instalación de fuentes desconocidas en los ajustes de tu dispositivo.</li>
+          <li>Abre el archivo APK y sigue las instrucciones en pantalla para instalar PlacaOk.</li>
+        </ol>
+        <div style="margin-top:0.7em;">
+          <strong>¿Necesitas ayuda?</strong> Escanea el código QR de arriba para abrir la app en Expo, o contacta a nuestro equipo de soporte.
+        </div>
+      </div>
+    </div>
+    <!-- Columna 3: Características -->
+    <div class="col">
+      <div class="features">
+        <div class="features-title">Características principales:</div>
+        <ul class="features-list">
+          <li>Búsqueda y validación rápida de matrículas</li>
+          <li>Registro y gestión sencilla de datos de placas</li>
+          <li>Interfaz moderna y fácil de usar</li>
+          <li>Funciona sin conexión tras la configuración inicial</li>
+          <li>Seguro y privado: tus datos permanecen en tu dispositivo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    const QR_URL = "https://expo.dev/accounts/llaapp/projects/PlacaOk/builds/2ef3df34-f94e-4cd9-a599-891d2089e901";
+    (function () {
+      var script = document.createElement('script');
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js";
+      script.onload = function () {
+        new QRious({
+          element: document.getElementById('qr'),
+          value: QR_URL,
+          size: 160,
+          background: getComputedStyle(document.documentElement).getPropertyValue('--qr-bg').trim(),
+          foreground: getComputedStyle(document.documentElement).getPropertyValue('--qr-fg').trim()
+        });
+      };
+      document.body.appendChild(script);
+    })();
+  </script>
+</body>
+
+</html>

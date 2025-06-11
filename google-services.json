@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "746574809184",
+    "project_id": "placaok-ai",
+    "storage_bucket": "placaok-ai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746574809184:android:16db3bd626d82be6e95b05",
+        "android_client_info": {
+          "package_name": "com.placaok"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ5uAPOdw_XMcjd5L48UYwDVy1WMoJips"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
