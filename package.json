@@ -1,33 +1,47 @@
 {
   "name": "placaok",
   "main": "expo-router/entry",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --clear",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "eas-update": "eas update --branch main --message 'Remote update'",
+    "eas-update:preview": "eas update --branch preview --message 'Remote preview update'",
+    "eas-build:ios": "eas build -p ios",
+    "eas-build:ios:preview": "eas build --platform ios --profile preview",
+    "eas-build:android": "eas build -p android",
+    "eas-build:android:preview": "eas build --platform android --profile preview",
+    "eas-build:all": "eas build -p all"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
+    "@react-native-seoul/masonry-list": "^1.4.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
     "expo": "~53.0.10",
+    "expo-application": "~6.1.4",
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.6",
+    "expo-device": "~7.1.4",
+    "expo-file-system": "~18.1.10",
     "expo-font": "~13.3.1",
     "expo-haptics": "~14.1.4",
     "expo-image": "~2.2.0",
     "expo-linking": "~7.1.5",
+    "expo-localization": "~16.1.5",
     "expo-router": "~5.0.7",
     "expo-splash-screen": "~0.30.9",
     "expo-status-bar": "~2.2.3",
     "expo-symbols": "~0.4.5",
     "expo-system-ui": "~5.0.8",
+    "expo-updates": "~0.28.14",
     "expo-web-browser": "~14.1.6",
+    "posthog-react-native": "^3.16.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.3",
@@ -41,9 +55,9 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~9.2.0"
+    "eslint-config-expo": "~9.2.0",
+    "typescript": "~5.8.3"
   },
   "private": true
 }
