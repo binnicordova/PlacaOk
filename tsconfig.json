@@ -15,6 +15,9 @@
       ],
       "@mocks/*": [
         "services/mocks/*"
+      ],
+      "@state/*": [
+        "state/*"
       ]
     }
   },

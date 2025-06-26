@@ -1,5 +1,9 @@
 import { WebviewScreen } from "@components/WebviewScreen";
 import MasonryList from '@react-native-seoul/masonry-list';
+import { currentVehiclePlateAtom, currentVisitedServicesByPlateAtom } from "@state/selectors";
+import * as Clipboard from 'expo-clipboard';
+import { useAtom } from 'jotai';
+import { PlateStatus } from 'models/plateStatus';
 import React, { useEffect, useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { ANALYTICS_EVENTS } from '../constants/analyticsEvents';
@@ -21,20 +25,28 @@ interface PlateServiceListProps {
 export const PlateServiceList: React.FC<PlateServiceListProps> = ({ services }) => {
   const theme = useTheme();
   const [selectedService, setSelectedService] = useState<PlateService | null>(null);
-  const [visited, setVisited] = useState<Record<string, boolean>>({});
+  const [vehiclePlate] = useAtom(currentVehiclePlateAtom);
+  const [visitedServicesByPlate, setVisitedServicesByPlate] = useAtom(currentVisitedServicesByPlateAtom);
 
   useEffect(() => {
-    if (selectedService) {
-      setVisited((prev) => ({ ...prev, [selectedService.url]: true }));
+    if (selectedService && vehiclePlate) {
       logAnalyticsEvent(ANALYTICS_EVENTS.SERVICE_ITEM_CLICKED, {
         title: selectedService.title,
         url: selectedService.url,
         subtitle: selectedService.subtitle,
         timestamp: new Date().toISOString(),
         screen: PLATE_SERVICE_LIST,
+        plate: vehiclePlate,
       });
+      Clipboard.setStringAsync(vehiclePlate);
     }
-  }, [selectedService]);
+  }, [selectedService, vehiclePlate]);
+
+  const handleServiceStatus = (status: PlateStatus) => {
+    if (!selectedService || !vehiclePlate) return;
+    setVisitedServicesByPlate({ ...visitedServicesByPlate, [selectedService.url]: status });
+    setSelectedService(null);
+  };
 
   return (
     <>
@@ -44,14 +56,17 @@ export const PlateServiceList: React.FC<PlateServiceListProps> = ({ services }) 
         numColumns={2}
         renderItem={({ item }) => {
           const service = item as PlateService;
-          const isVisited = visited[service.url];
+          const visitStatus = visitedServicesByPlate[service.url] as PlateStatus;
+          const statusLabel = visitStatus === PlateStatus.OK ? 'Placa OK' : visitStatus === PlateStatus.OBSERVED ? 'Placa Observada' : '';
+          const statusColor = visitStatus === PlateStatus.OK ? theme.accent : visitStatus === PlateStatus.OBSERVED ? '#e67e22' : theme.textColor;
+
           return (
-            <Pressable onPress={() => setSelectedService(service)}>
-              <View style={[styles.card, { backgroundColor: theme.cardBackground, borderColor: theme.border, borderWidth: 1, opacity: isVisited ? 0.6 : 1 }]}> 
+            <Pressable onPress={() => setSelectedService(service)} disabled={!vehiclePlate}>
+              <View style={[styles.card, { backgroundColor: theme.cardBackground, borderColor: theme.border, borderWidth: 1, opacity: visitStatus ? 0.6 : 1 }]}>
                 <Text style={[styles.item, { color: theme.textColor }]}>{service.title}</Text>
                 <Text style={[styles.subtitle, { color: theme.textColor }]}>{service.subtitle}</Text>
-                {isVisited && (
-                  <Text style={[styles.visited, { color: theme.accent }]}>Visitado</Text>
+                {visitStatus && (
+                  <Text style={[styles.visited, { color: statusColor }]}>{statusLabel}</Text>
                 )}
               </View>
             </Pressable>
@@ -60,8 +75,13 @@ export const PlateServiceList: React.FC<PlateServiceListProps> = ({ services }) 
         contentContainerStyle={{ paddingHorizontal: 8 }}
       />
       <Modal visible={!!selectedService} animationType="slide" onRequestClose={() => setSelectedService(null)}>
-        {selectedService && (
-          <WebviewScreen url={selectedService.url} onClose={() => setSelectedService(null)} />
+        {selectedService && vehiclePlate && (
+          <WebviewScreen
+            url={selectedService.url}
+            onClose={() => setSelectedService(null)}
+            onOk={() => handleServiceStatus(PlateStatus.OK)}
+            onObserved={() => handleServiceStatus(PlateStatus.OBSERVED)}
+          />
         )}
       </Modal>
     </>
