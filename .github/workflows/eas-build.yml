@@ -1,12 +1,14 @@
-name: EAS Preview App
+name: EAS Build App
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
 
 permissions: write-all
 
 jobs:
-  preview:
+  build:
     runs-on: ubuntu-latest
     # environment: ENV
     env:
@@ -46,7 +48,5 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: 🚀 Create preview
-        uses: expo/expo-github-action/preview@v8
-        with:
-          command: eas update --auto --branch ${{ github.event.pull_request.head.ref }}
+      - name: 🚀 Build app
+        run: eas build --platform android --non-interactive

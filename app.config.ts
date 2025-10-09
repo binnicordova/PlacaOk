@@ -1,9 +1,10 @@
-import { ConfigContext, ExpoConfig } from '@expo/config';
+import type { ExpoConfig } from "@expo/config-types";
+import "dotenv/config";
 
-export default ({ config }: ConfigContext): ExpoConfig => ({
+export default ({ config }: { config: ExpoConfig }): ExpoConfig => ({
   ...config,
-  name: process.env.APP_NAME,
-  slug: process.env.APP_SLUG,
+  name: process.env.APP_NAME!,
+  slug: process.env.APP_SLUG!,
   version: process.env.APP_VERSION_NAME,
   orientation: 'portrait',
   icon: 'assets/images/icon.png',
@@ -32,7 +33,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     favicon: 'assets/images/favicon.png',
   },
   plugins: [
-    'expo-router',
+    [
+      'expo-router',
+      {
+        root: process.env.EXPO_ROUTER_APP_ROOT || 'src/app',
+      },
+    ],
     [
       'expo-splash-screen',
       {
@@ -43,11 +49,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       },
     ],
     'expo-localization',
+    "expo-font",
+    "expo-web-browser",
   ],
   experiments: {
     typedRoutes: true,
   },
   extra: {
+    EXPO_ROUTER_APP_ROOT: process.env.EXPO_ROUTER_APP_ROOT,
     POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
     POSTHOG_HOST: process.env.POSTHOG_HOST,
     APPWRITE_ENDPOINT: process.env.APPWRITE_ENDPOINT,
