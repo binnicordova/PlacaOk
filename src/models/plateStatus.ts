@@ -1,4 +1,4 @@
 export enum PlateStatus {
-  OK = 'ok',
-  OBSERVED = 'observed',
+	OK = "ok",
+	OBSERVED = "observed",
 }

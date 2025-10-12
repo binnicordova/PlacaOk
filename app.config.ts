@@ -1,86 +1,100 @@
 import type { ExpoConfig } from "@expo/config-types";
 import "dotenv/config";
 
-export default ({ config }: { config: ExpoConfig }): ExpoConfig => ({
-  ...config,
-  name: process.env.APP_NAME!,
-  slug: process.env.APP_SLUG!,
-  version: process.env.APP_VERSION_NAME,
-  orientation: 'portrait',
-  icon: 'assets/images/icon.png',
-  scheme: process.env.APP_SCHEME,
-  userInterfaceStyle: 'automatic',
-  newArchEnabled: true,
-  ios: {
-    supportsTablet: true,
-    googleServicesFile: './GoogleService-Info.plist',
-    bundleIdentifier: process.env.IOS_BUNDLE_IDENTIFIER,
-    buildNumber: '1',
-  },
-  android: {
-    adaptiveIcon: {
-      foregroundImage: 'assets/images/adaptive-icon.png',
-      backgroundColor: '#ffffff',
+const EAS_OWNER = process.env.EAS_OWNER; // by https://www.binnicordova.com
+const EAS_SLUG = "PlacaOk";
+const EAS_PROJECT_ID = process.env.EAS_PROJECT_ID;
+
+const VERSION = "0.0.1";
+const VERSION_CODE = 1;
+
+const APP_VARIANTS = {
+    development: {
+        identifier: "com.placaok.dev",
+        name: "PlacaOk (Dev)",
+        scheme: "dev.placaok.com",
     },
-    edgeToEdgeEnabled: true,
-    googleServicesFile: './google-services.json',
-    package: process.env.ANDROID_PACKAGE,
-    versionCode: Number(process.env.APP_VERSION_CODE),
-  },
-  web: {
-    bundler: 'metro',
-    output: 'static',
-    favicon: 'assets/images/favicon.png',
-  },
-  plugins: [
-    [
-      'expo-router',
-      {
-        root: process.env.EXPO_ROUTER_APP_ROOT || 'src/app',
-      },
+    preview: {
+        identifier: "com.placaok.preview",
+        name: "PlacaOk (Preview)",
+        scheme: "preview.placaok.com",
+    },
+    production: {
+        identifier: "com.placaok",
+        name: "PlacaOk",
+        scheme: "placaok.com",
+    },
+};
+
+const getAppVariant = () => {
+    if (process.env.APP_VARIANT === "development")
+        return APP_VARIANTS.development;
+    if (process.env.APP_VARIANT === "preview") return APP_VARIANTS.preview;
+    return APP_VARIANTS.production;
+};
+
+const getUniqueIdentifier = () => getAppVariant().identifier;
+const getAppName = () => getAppVariant().name;
+const getScheme = () => getAppVariant().scheme;
+
+export default ({config}: {config: ExpoConfig}): ExpoConfig => ({
+    ...config,
+    name: getAppName(),
+    scheme: getScheme(),
+    slug: EAS_SLUG,
+    version: VERSION,
+    orientation: "portrait",
+    icon: "./assets/icon.png",
+    newArchEnabled: true,
+    splash: {
+        image: "./assets/splash.png",
+        resizeMode: "contain",
+        backgroundColor: "#ffffff",
+    },
+    updates: {
+        fallbackToCacheTimeout: 0,
+        url: `https://u.expo.dev/${EAS_PROJECT_ID}`,
+        enabled: true,
+    },
+    assetBundlePatterns: ["**/*"],
+    ios: {
+        supportsTablet: true,
+        bundleIdentifier: getUniqueIdentifier(),
+        version: VERSION,
+    },
+    android: {
+        adaptiveIcon: {
+            foregroundImage: "./assets/adaptive-icon.png",
+            backgroundColor: "#FFFFFF",
+        },
+        package: getUniqueIdentifier(),
+        versionCode: VERSION_CODE,
+        version: VERSION,
+    },
+    web: {
+        favicon: "./assets/favicon.png",
+        bundler: "metro",
+    },
+    extra: {
+        router: {
+            root: "src/app",
+        },
+        eas: {
+            projectId: EAS_PROJECT_ID,
+        },
+    },
+    owner: EAS_OWNER,
+    runtimeVersion: {
+        policy: "appVersion",
+    },
+    userInterfaceStyle: "automatic",
+    plugins: [
+        [
+            "expo-router",
+            {
+                root: "src/app",
+            },
+        ],
+        "expo-background-task"
     ],
-    [
-      'expo-splash-screen',
-      {
-        image: 'assets/images/splash-icon.png',
-        imageWidth: 200,
-        resizeMode: 'contain',
-        backgroundColor: '#ffffff',
-      },
-    ],
-    'expo-localization',
-    "expo-font",
-    "expo-web-browser",
-  ],
-  experiments: {
-    typedRoutes: true,
-  },
-  extra: {
-    EXPO_ROUTER_APP_ROOT: process.env.EXPO_ROUTER_APP_ROOT,
-    POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
-    POSTHOG_HOST: process.env.POSTHOG_HOST,
-    APPWRITE_ENDPOINT: process.env.APPWRITE_ENDPOINT,
-    APPWRITE_PROJECT_ID: process.env.APPWRITE_PROJECT_ID,
-    APPWRITE_DATABASE_ID: process.env.APPWRITE_DATABASE_ID,
-    APPWRITE_COLLECTION_ID: process.env.APPWRITE_COLLECTION_ID,
-    EXPO_PROJECT_ID: process.env.EXPO_PROJECT_ID,
-    EXPO_OWNER: process.env.EXPO_OWNER,
-    APP_NAME: process.env.APP_NAME,
-    APP_SLUG: process.env.APP_SLUG,
-    APP_SCHEME: process.env.APP_SCHEME,
-    APP_VERSION_NAME: process.env.APP_VERSION_NAME,
-    APP_VERSION_CODE: process.env.APP_VERSION_CODE,
-    ANDROID_PACKAGE: process.env.ANDROID_PACKAGE,
-    IOS_BUNDLE_IDENTIFIER: process.env.IOS_BUNDLE_IDENTIFIER,
-  },
-  runtimeVersion: {
-    policy: 'appVersion',
-  },
-  owner: process.env.EXPO_OWNER,
-  updates: {
-    fallbackToCacheTimeout: 0,
-    checkAutomatically: 'ON_LOAD',
-    enabled: true,
-    url: `https://u.expo.dev/${process.env.EXPO_PROJECT_ID}`,
-  },
 });

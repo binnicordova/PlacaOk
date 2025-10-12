@@ -1,137 +1,111 @@
-# PlacaOk 🚗
+# PlacaOk 🚗🔎
 
-A modern cross-platform app for vehicle-related services, built with Expo, React Native, and PostHog analytics.
+- [Download on Google Play](https://play.google.com/store/apps/details?id=com.placaok)
+- [Download on the App Store](https://apps.apple.com/app/idYOUR_APP_ID)
 
-## 🚀 Getting Started
+Discover services, verify plates, and check vehicle records in a single tap — now with a friendly Dark Mode (and good vibes). 😎
 
-1. **Install dependencies**
+<!-- Horizontal scrollable image strip -->
+<div style="display:flex; gap:12px; overflow-x:auto; padding:12px 0;">
+	<img src="resources/store_phone_1.jpeg" alt="Screenshot 1" width="240" style="border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.12);"/>
+	<img src="resources/store_phone_2.jpeg" alt="Screenshot 2" width="240" style="border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.12);"/>
+	<img src="resources/store_phone_3.jpeg" alt="Screenshot 3" width="240" style="border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.12);"/>
+</div>
 
-   ```bash
-   pnpm install
-   ```
+**Find services in a tap — fast tools, Dark Mode, zero fuss.**
 
-2. **Start the app locally**
+Find services instantly — lightning-fast browsing, Dark Mode & in‑app webview 🧭
 
-   ```bash
-   pnpm expo start
-   ```
+PlacaOk bundles all the vehicle-checking magic into one handy app. Need to verify a plate, check documents, look up tickets, confirm insurance (SOAT), or see owner history? Tap, scan, done. Fast UI, friendly layout, and privacy-minded analytics keep things smooth and worry-free.
 
-   Scan the QR code with Expo Go or open in an emulator/simulator.
+What you get (quick):
 
-## 🛠️ Remote Updates (OTA) with Expo
+- 🧰 All-in-one toolkit: plate lookup, document checks, license validation, ticket & debit status, owner history
+- 🔍 Faster discovery: masonry-style grid so you find tools faster
+- 🌐 Seamless browsing: in-app webview keeps you inside the app (no jumping around)
+- 🌗 Dark + Light Mode: follows your device so reading is comfy
+- 🔖 Visited indicators: know what you've already checked
+- 🔒 Privacy-first: anonymous analytics only, no personal data shared
 
-Expo supports over-the-air (OTA) updates, similar to CodePush.
+Why people ❤️ PlacaOk:
 
-- **Push an OTA update to the main branch:**
-  ```bash
-  pnpm eas-update
-  ```
+- Save time during inspections and verifications ⏱️
+- Reduce mistakes by seeing consolidated records in one place ✅
+- Make confident decisions with easy access to tickets, debits, and registry info
 
-- **Push an OTA update to the preview branch:**
-  ```bash
-  pnpm eas-update:preview
-  ```
+Download PlacaOk and start verifying in a tap — it’s quick, quiet, and helpful. 🎉
 
-## 🚚 Deploying to Expo Channels
+## Release notes
 
-- **Build for Android (preview profile):**
-  ```bash
-  pnpm eas-build:android:preview
-  ```
+PlacaOk — Faster browsing & Dark Mode
 
-- **Build for iOS (preview profile):**
-  ```bash
-  pnpm eas-build:ios:preview
-  ```
+Discover faster, browse smarter — now with Dark Mode. 🌙✨
 
-- **Edit a channel to point to a specific branch:**
-  ```bash
-  pnpm eas-channel:edit:staging
-  ```
+- 🆕 Masonry-style service list for quicker scanning and better use of screen space
+- 🆕 Open services in an in-app webview with an easy close button — no context switching
+- 🆕 Dark and Light themes; follows your system for a consistent look
+- 🆕 Visited-state indicators so you can tell which services you’ve already opened
+- ⚡ UI polish and performance improvements across screens
+- 🛠️ Bug fixes: multiple layout and stability fixes
 
-## 🌐 Updating the `public/index.html` for Web Releases and APK Download
+## Contribute
 
-The `public/index.html` file serves as a landing page inviting users to download the latest APK. **Each time you release a new version, you must update the download link inside this file to point to the latest APK.**
+Want to contribute or report a bug? Open an issue in the repo, include a sandbox — we read them! 🙌
 
-**Steps:**
-1. Edit `public/index.html` and update the APK download link to the latest release URL (e.g., from EAS Build output).
-2. Optionally update version, meta tags, or other content as needed.
-3. Commit your changes:
-   ```bash
-   git add public/index.html
-   git commit -m "Update public/index.html with latest APK link for vX.Y.Z"
-   git push
-   ```
-4. Deploy your web build as usual.
+What's next
+-----------
 
-## 🤝 Collaboration
+Here's what's coming next for PlacaOk (and how you can help):
 
-- **Branch naming:**  
-  Use the pattern:  
-  - `feature/<short-description>` for new features  
-  - `fix/<short-description>` for bug fixes  
-  - `chore/<short-description>` for maintenance  
-  - `docs/<short-description>` for documentation updates
+- 🔎 Improved search and filters — find exact services faster
+- 🌍 Localization: Spanish and other languages for broader reach
+- 📸 Plate OCR: snap a photo and auto-fill the plate field
+- 🔔 Alerts & history: optional notifications for ticket/debt changes
+- 🧪 Beta program: sign up to test upcoming features and provide feedback
 
-  Example:  
-  ```
-  feature/user-authentication
-  fix/service-list-bug
-  ```
 
-- **Commit messages:**  
-  Follow [Conventional Commits](https://www.conventionalcommits.org/) and use [commitlint](https://commitlint.js.org/).  
-  Example:  
-  ```
-  feat: add user authentication flow
-  fix: correct service list rendering bug
-  ```
+## How we work ?
 
-- **Pre-commit checks:**  
-  This repo uses [lint-staged](https://github.com/okonet/lint-staged) and a pre-commit hook to ensure code quality.  
-  - Staged files are automatically linted and formatted before commit.
-  - If checks fail, the commit will be aborted.
-
-- **How to contribute:**  
-  1. Fork the repo and create a branch using the naming pattern above.
-  2. Make your changes and commit using the commitlint rules.
-  3. Push and open a Pull Request.
-  4. Ensure all pre-commit checks pass.
-
-## 📊 Analytics
-
-All analytics are tracked with [PostHog](https://posthog.com/) (see `src/services/analytics.ts`).  
-No magic strings—use constants for all event names and properties.
-
-## 🧭 App User Flow
 
 ```mermaid
 sequenceDiagram
-   participant User
-   participant App
-   participant PostHog
+	Actor User
+	participant UI as App UI
+	participant Atoms as Jotai Atoms
+	participant Storage as AsyncStorage
+	participant BG as Background Task
+	participant Firestore as Firestore
 
-   User->>App: Open app
-   App->>User: Check authentication
-   alt User is authenticated
-      App->>User: Show main dashboard
-   else User is not authenticated
-      App->>User: Show login/register
-      User->>App: Login/Register
-      App->>User: Show main dashboard
-   end
-   User->>App: Select a service
-   App->>User: Show service details
-   User->>App: Interact with service
-   App->>PostHog: Send analytics event
-   User->>App: Return to dashboard or exit
+	Note over User,UI: User opens app / selects plate / marks service status
+	User->>UI: set plate / mark service OK/OBSERVED
+	UI->>Atoms: update currentVisitedServicesByPlateAtom
+	Atoms->>Storage: saveVisitedServicesByPlate(plate, data)
+	Storage-->>Atoms: stored (inCloud: false)
+
+	Note over BG,Storage: Periodic background sync runs
+	BG->>Storage: getAllKeys()
+	loop for each plate
+		BG->>Storage: getVisitedServicesByPlate(plate)
+		alt not inCloud
+			BG->>Firestore: setVisitedServicesToCloud(plate, data)
+			Firestore-->>BG: success
+			BG->>Storage: markPlateAsInCloud(plate)
+		else already inCloud
+			Storage-->>BG: skip
+		end
+	end
+
+	Note over UI,Atoms: On plate selection, try cloud first
+	UI->>Atoms: set currentVehiclePlateAtom(plate)
+	Atoms->>Firestore: getVisitedServicesFromCloud(plate)
+	alt cloud data exists
+		Firestore-->>Atoms: data
+		Atoms->>Storage: saveVisitedServicesByPlate(plate, data)  
+	else no cloud data
+		Storage-->>Atoms: load cached data (if any)
+	end
 ```
 
-
-## 📚 Resources
-
-- [Expo Documentation](https://docs.expo.dev/)
-- [PostHog Docs](https://posthog.com/docs/libraries/react-native)
-- [Expo Router](https://expo.github.io/router/docs/)
-
-Happy coding! 🚀
+Author
+------
+[BinniCordova.com](https://BinniCordova.com)

@@ -8,20 +8,10 @@ permissions: write-all
 jobs:
   preview:
     runs-on: ubuntu-latest
-    # environment: ENV
+    environment: ENV
     env:
       EAS_OWNER: ${{ secrets.EAS_OWNER }}
       EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
-      EXPO_PUBLIC_SOCKET_SERVER_URL: ${{ secrets.EXPO_PUBLIC_SOCKET_SERVER_URL }}
-      ANDROID_PACKAGE: ${{ secrets.ANDROID_PACKAGE }}
-      APP_NAME: ${{ secrets.APP_NAME }}
-      APP_SCHEME: ${{ secrets.APP_SCHEME }}
-      APP_SLUG: ${{ secrets.APP_SLUG }}
-      APP_VERSION_CODE: ${{ secrets.APP_VERSION_CODE }}
-      APP_VERSION_NAME: ${{ secrets.APP_VERSION_NAME }}
-      EXPO_OWNER: ${{ secrets.EXPO_OWNER }}
-      EXPO_PROJECT_ID: ${{ secrets.EXPO_PROJECT_ID }}
-      IOS_BUNDLE_IDENTIFIER: ${{ secrets.IOS_BUNDLE_IDENTIFIER }}
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v4

@@ -1,24 +1,42 @@
-import { getVisitedServicesByPlate, saveVisitedServicesByPlate } from "@services/plateServices";
+import { getVisitedServicesFromCloud } from "@services/firestore";
+import {
+	getVisitedServicesByPlate,
+	saveVisitedServicesByPlate,
+} from "@services/plate";
 import { atom } from "jotai";
-import { vehiclePlateAtom, VisitedServicesByPlate, visitedServicesByPlateAtom } from "./atoms";
+import {
+	type VisitedServicesByPlate,
+	vehiclePlateAtom,
+	visitedServicesByPlateAtom,
+} from "./atoms";
 
 export const currentVehiclePlateAtom = atom(
-    (get) => get(vehiclePlateAtom),
-    (get, set, update: string) => {
-        set(vehiclePlateAtom, update);
-        void getVisitedServicesByPlate(update).then((data) =>
-            set(visitedServicesByPlateAtom, data || {})
-        );
-    }
+	(get) => get(vehiclePlateAtom),
+	(get, set, plate: string) => {
+		set(vehiclePlateAtom, plate);
+		const defaultCallback = () => {
+			void getVisitedServicesByPlate(plate).then((data) =>
+				set(visitedServicesByPlateAtom, data || {}),
+			);
+		};
+		void getVisitedServicesFromCloud(plate)
+			.then((data) => {
+				if (data) {
+					set(visitedServicesByPlateAtom, data);
+					saveVisitedServicesByPlate(plate, data);
+				} else defaultCallback();
+			})
+			.catch(() => defaultCallback());
+	},
 );
 
 export const currentVisitedServicesByPlateAtom = atom(
-    (get) => get(visitedServicesByPlateAtom),
-    (get, set, update: VisitedServicesByPlate) => {
-        set(visitedServicesByPlateAtom, update);
-        const currentPlate = get(currentVehiclePlateAtom);
-        if (currentPlate) {
-            saveVisitedServicesByPlate(currentPlate, update);
-        }
-    }
+	(get) => get(visitedServicesByPlateAtom),
+	(get, set, update: VisitedServicesByPlate) => {
+		set(visitedServicesByPlateAtom, update);
+		const currentPlate = get(currentVehiclePlateAtom);
+		if (currentPlate) {
+			saveVisitedServicesByPlate(currentPlate, update);
+		}
+	},
 );
