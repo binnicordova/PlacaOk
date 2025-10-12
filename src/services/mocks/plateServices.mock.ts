@@ -1,17 +1,77 @@
 export const MOCK_PLATE_SERVICES = [
-  { title: "SAT - Pagos en línea", url: "https://www.sat.gob.pe/pagosenlinea/", subtitle: "Paga tus multas y tributos municipales en línea" },
-  { title: "SUNARP - SPRL", url: "https://sprl.sunarp.gob.pe/sprl/ingreso", subtitle: "Consulta trámites y servicios registrales" },
-  { title: "SUTRAN - Récord de Infracciones", url: "https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/", subtitle: "Verifica el récord de infracciones de tu vehículo" },
-  { title: "SUNARP - Conoce Aquí", url: "https://conoce-aqui.sunarp.gob.pe/conoce-aqui/inicio", subtitle: "Consulta información registral de vehículos" },
-  { title: "Papeletas Callao", url: "https://pagopapeletascallao.pe/", subtitle: "Consulta y paga papeletas del Callao" },
-  { title: "SOAT - SBS", url: "https://servicios.sbs.gob.pe/reportesoat/BusquedaPlaca", subtitle: "Verifica el SOAT de tu vehículo en SBS" },
-  { title: "ATU - Pasarela", url: "https://pasarela.atu.gob.pe/", subtitle: "Consulta servicios de transporte urbano" },
-  { title: "MTC - Inspección Técnica", url: "https://portal.mtc.gob.pe/reportedgtt/form/frmconsultaplacaitv.aspx", subtitle: "Consulta la inspección técnica vehicular" },
-  { title: "Multas JNE", url: "https://multas.jne.gob.pe/login", subtitle: "Consulta multas electorales asociadas a la placa" },
-  { title: "SOAT - APESEG", url: "https://www.apeseg.org.pe/consultas-soat/", subtitle: "Verifica el SOAT en APESEG" },
-  { title: "Capturas SAT", url: "https://www.sat.gob.pe/VirtualSAT/modulos/Capturas.aspx?mysession=", subtitle: "Consulta capturas de vehículos por el SAT" },
-  { title: "Infogas", url: "https://infogas.com.pe/", subtitle: "Consulta información de conversión a GNV" },
-  { title: "Estado de Placas", url: "https://www.placas.pe/Public/CheckPlateStatus.aspx", subtitle: "Verifica el estado de la placa de tu vehículo" },
-  { title: "Consulta Vehicular - SUNARP", url: "https://consultavehicular.sunarp.gob.pe/consulta-vehicular/inicio", subtitle: "Consulta información vehicular en SUNARP" },
-  { title: "Sigue tu trámite SUNARP", url: "https://sigueloplus.sunarp.gob.pe/siguelo/", subtitle: "Haz seguimiento a tus trámites en SUNARP" },
+	{
+		title: "SAT - Pagos en línea",
+		url: "https://www.sat.gob.pe/pagosenlinea/",
+		subtitle: "Paga tus multas y tributos municipales en línea",
+	},
+	{
+		title: "SUNARP - SPRL",
+		url: "https://sprl.sunarp.gob.pe/sprl/ingreso",
+		subtitle: "Consulta trámites y servicios registrales",
+	},
+	{
+		title: "SUTRAN - Récord de Infracciones",
+		url: "https://www.sutran.gob.pe/consultas/record-de-infracciones/record-de-infracciones/",
+		subtitle: "Verifica el récord de infracciones de tu vehículo",
+	},
+	{
+		title: "SUNARP - Conoce Aquí",
+		url: "https://conoce-aqui.sunarp.gob.pe/conoce-aqui/inicio",
+		subtitle: "Consulta información registral de vehículos",
+	},
+	{
+		title: "Papeletas Callao",
+		url: "https://pagopapeletascallao.pe/",
+		subtitle: "Consulta y paga papeletas del Callao",
+	},
+	{
+		title: "SOAT - SBS",
+		url: "https://servicios.sbs.gob.pe/reportesoat/BusquedaPlaca",
+		subtitle: "Verifica el SOAT de tu vehículo en SBS",
+	},
+	{
+		title: "ATU - Pasarela",
+		url: "https://pasarela.atu.gob.pe/",
+		subtitle: "Consulta servicios de transporte urbano",
+	},
+	{
+		title: "MTC - Inspección Técnica",
+		url: "https://portal.mtc.gob.pe/reportedgtt/form/frmconsultaplacaitv.aspx",
+		subtitle: "Consulta la inspección técnica vehicular",
+	},
+	{
+		title: "Multas JNE",
+		url: "https://multas.jne.gob.pe/login",
+		subtitle: "Consulta multas electorales asociadas a la placa",
+	},
+	{
+		title: "SOAT - APESEG",
+		url: "https://www.apeseg.org.pe/consultas-soat/",
+		subtitle: "Verifica el SOAT en APESEG",
+	},
+	{
+		title: "Capturas SAT",
+		url: "https://www.sat.gob.pe/VirtualSAT/modulos/Capturas.aspx?mysession=",
+		subtitle: "Consulta capturas de vehículos por el SAT",
+	},
+	{
+		title: "Infogas",
+		url: "https://infogas.com.pe/",
+		subtitle: "Consulta información de conversión a GNV",
+	},
+	{
+		title: "Estado de Placas",
+		url: "https://www.placas.pe/Public/CheckPlateStatus.aspx",
+		subtitle: "Verifica el estado de la placa de tu vehículo",
+	},
+	{
+		title: "Consulta Vehicular - SUNARP",
+		url: "https://consultavehicular.sunarp.gob.pe/consulta-vehicular/inicio",
+		subtitle: "Consulta información vehicular en SUNARP",
+	},
+	{
+		title: "Sigue tu trámite SUNARP",
+		url: "https://sigueloplus.sunarp.gob.pe/siguelo/",
+		subtitle: "Haz seguimiento a tus trámites en SUNARP",
+	},
 ];

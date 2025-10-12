@@ -1,4 +1,4 @@
 // Example API file
 export const fetchPlateServices = async () => {
-  // Implement API logic here
+	// Implement API logic here
 };
