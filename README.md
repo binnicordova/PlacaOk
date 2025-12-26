@@ -12,6 +12,11 @@ Discover services, verify plates, and check vehicle records in a single tap — 
 	<img src="resources/store_phone_3.jpeg" alt="Screenshot 3" width="240" style="border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.12);"/>
 </div>
 
+## How AI Works
+
+Inspired in this project: [Python License Plate Detection](https://github.com/Arijit1080/Licence-Plate-Detection-using-TensorFlow-Lite)
+
+
 **Find services in a tap — fast tools, Dark Mode, zero fuss.**
 
 Find services instantly — lightning-fast browsing, Dark Mode & in‑app webview 🧭

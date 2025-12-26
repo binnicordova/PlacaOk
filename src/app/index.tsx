@@ -4,26 +4,35 @@ import { VehiclePlateModal } from "@components/VehiclePlateModal";
 import { MOCK_PLATE_SERVICES } from "@mocks/plateServices.mock";
 import { BACKGROUND_SYNC_HANDLER } from "@services/background";
 import { currentVehiclePlateAtom } from "@state/selectors";
-import { useAtom } from "jotai";
-import React, { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
+import React, { useCallback, useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
 
 export default function Index() {
 	const theme = useTheme();
-	const [vehiclePlate] = useAtom(currentVehiclePlateAtom);
+	const vehiclePlate = useAtomValue(currentVehiclePlateAtom);
 	const [showPlateModal, setShowPlateModal] = useState(!vehiclePlate);
 
-	const handleChangePlate = () => setShowPlateModal(true);
+	const handleChangePlate = () => {
+		setShowPlateModal(true);
+	};
 	const handleCloseModal = () => {
 		if (vehiclePlate && vehiclePlate.trim().length > 0) {
 			setShowPlateModal(false);
 		}
 	};
 
-	useEffect(() => {
-		setShowPlateModal(!(vehiclePlate && vehiclePlate.trim().length > 0));
+	const evaluateShowModal = useCallback(() => {
+		const showModal = !(vehiclePlate && vehiclePlate.trim().length > 0);
+		console.log("Evaluating show plate modal:", showModal, vehiclePlate);
+		setShowPlateModal(showModal);
 	}, [vehiclePlate]);
+
+	useEffect(() => {
+		BACKGROUND_SYNC_HANDLER();
+		evaluateShowModal();
+	}, [evaluateShowModal]);
 
 	return (
 		<Screen>
