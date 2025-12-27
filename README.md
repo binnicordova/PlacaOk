@@ -3,7 +3,9 @@
 - [Download on Google Play](https://play.google.com/store/apps/details?id=com.placaok)
 - [Download on the App Store](https://apps.apple.com/app/idYOUR_APP_ID)
 
-Discover services, verify plates, and check vehicle records in a single tap — now with a friendly Dark Mode (and good vibes). 😎
+Discover services, verify plates, and check vehicle records in a single tap — now with AI Recognition with NO COST (and good vibes). 😎
+
+![AI-PlacaOk](https://github.com/user-attachments/assets/1e8f3551-34cd-4016-9b5e-176c722b09dd)
 
 <!-- Horizontal scrollable image strip -->
 <div style="display:flex; gap:12px; overflow-x:auto; padding:12px 0;">
