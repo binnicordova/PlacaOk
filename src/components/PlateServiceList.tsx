@@ -5,9 +5,10 @@ import {
 	currentVisitedServicesByPlateAtom,
 } from "@state/selectors";
 import * as Clipboard from "expo-clipboard";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { PlateStatus } from "models/plateStatus";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { ANALYTICS_EVENTS } from "../constants/analyticsEvents";
 import { logAnalyticsEvent } from "../services/analytics";
@@ -32,7 +33,7 @@ export const PlateServiceList: React.FC<PlateServiceListProps> = ({
 	const [selectedService, setSelectedService] = useState<PlateService | null>(
 		null,
 	);
-	const [vehiclePlate] = useAtom(currentVehiclePlateAtom);
+	const vehiclePlate = useAtomValue(currentVehiclePlateAtom);
 	const [visitedServicesByPlate, setVisitedServicesByPlate] = useAtom(
 		currentVisitedServicesByPlateAtom,
 	);

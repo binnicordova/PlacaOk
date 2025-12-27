@@ -11,8 +11,11 @@ import {
 } from "./atoms";
 
 export const currentVehiclePlateAtom = atom(
-	(get) => get(vehiclePlateAtom),
+	async (get) => {
+		return await get(vehiclePlateAtom);
+	},
 	(get, set, plate: string) => {
+		console.log("Setting vehicle plate to:", plate);
 		set(vehiclePlateAtom, plate);
 		const defaultCallback = () => {
 			void getVisitedServicesByPlate(plate).then((data) =>
@@ -32,9 +35,9 @@ export const currentVehiclePlateAtom = atom(
 
 export const currentVisitedServicesByPlateAtom = atom(
 	(get) => get(visitedServicesByPlateAtom),
-	(get, set, update: VisitedServicesByPlate) => {
+	async (get, set, update: VisitedServicesByPlate) => {
 		set(visitedServicesByPlateAtom, update);
-		const currentPlate = get(currentVehiclePlateAtom);
+		const currentPlate = await get(currentVehiclePlateAtom);
 		if (currentPlate) {
 			saveVisitedServicesByPlate(currentPlate, update);
 		}

@@ -1,7 +1,9 @@
 import { currentVehiclePlateAtom } from "@state/selectors";
-import { useAtom } from "jotai";
+import { useRouter } from "expo-router";
+import { useSetAtom } from "jotai";
 import React, { useState } from "react";
 import {
+	KeyboardAvoidingView,
 	Modal,
 	Pressable,
 	StyleSheet,
@@ -10,6 +12,7 @@ import {
 	View,
 } from "react-native";
 import { useTheme } from "../theme/ThemeProvider";
+import { Icon } from "./Icon";
 
 export function VehiclePlateModal({
 	visible,
@@ -19,8 +22,9 @@ export function VehiclePlateModal({
 	onClose: () => void;
 }) {
 	const theme = useTheme();
+	const router = useRouter();
 	const [inputPlate, setInputPlate] = useState("");
-	const [, setVehiclePlate] = useAtom(currentVehiclePlateAtom);
+	const setVehiclePlate = useSetAtom(currentVehiclePlateAtom);
 
 	const handlePlateSubmit = () => {
 		if (!inputPlate || inputPlate.trim().length === 0) {
@@ -33,7 +37,7 @@ export function VehiclePlateModal({
 
 	return (
 		<Modal visible={visible} animationType="slide" transparent>
-			<View style={styles.modalOverlay}>
+			<KeyboardAvoidingView behavior="padding" style={styles.modalOverlay}>
 				<View
 					style={[
 						styles.modalContent,
@@ -50,19 +54,43 @@ export function VehiclePlateModal({
 					>
 						Ingresa la placa del vehículo
 					</Text>
-					<TextInput
-						value={inputPlate}
-						onChangeText={setInputPlate}
-						placeholder="Ej: ABC123"
-						autoCapitalize="characters"
-						style={[
-							styles.input,
-							{ color: theme.textColor, borderColor: theme.border },
-						]}
-						placeholderTextColor={theme.border}
-						autoFocus
-						onSubmitEditing={handlePlateSubmit}
-					/>
+					<View
+						style={{
+							flexDirection: "row",
+							justifyContent: "space-between",
+							alignItems: "center",
+							alignContent: "center",
+						}}
+					>
+						<TextInput
+							value={inputPlate}
+							onChangeText={setInputPlate}
+							placeholder="Ej: ABC123"
+							autoCapitalize="characters"
+							style={[
+								styles.input,
+								{ color: theme.textColor, borderColor: theme.border },
+							]}
+							placeholderTextColor={theme.border}
+							autoFocus
+							onSubmitEditing={handlePlateSubmit}
+						/>
+						<Icon
+							name="camera-outline"
+							size={32}
+							color={theme.accent}
+							onPress={() => router.push("/recognition")}
+							style={styles.icon}
+						>
+							<Text style={{ color: theme.accent, fontSize: 15 }}>IA</Text>
+							<Icon
+								name="logo-apple-ar"
+								size={15}
+								color={theme.accent}
+								style={{ marginLeft: 2 }}
+							/>
+						</Icon>
+					</View>
 					<Pressable
 						style={[styles.button, { backgroundColor: theme.accent }]}
 						onPress={handlePlateSubmit}
@@ -72,7 +100,7 @@ export function VehiclePlateModal({
 						</Text>
 					</Pressable>
 				</View>
-			</View>
+			</KeyboardAvoidingView>
 		</Modal>
 	);
 }
@@ -96,9 +124,11 @@ const styles = StyleSheet.create({
 		padding: 10,
 		width: 180,
 		fontSize: 18,
-		marginBottom: 16,
 		textAlign: "center",
 		letterSpacing: 2,
+	},
+	icon: {
+		paddingLeft: 10,
 	},
 	button: {
 		borderRadius: 8,
